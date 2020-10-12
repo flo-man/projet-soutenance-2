@@ -39,12 +39,18 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         $this->passwordEncoder = $passwordEncoder;
     }
 
+    /**
+     * 1. vérifier s'il y a une tentative de connexion
+     */
     public function supports(Request $request)
     {
         return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
+    /**
+     * 2. Récupérer les données du formulaire de connexion
+     */
     public function getCredentials(Request $request)
     {
         $credentials = [
@@ -60,8 +66,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         return $credentials;
     }
 
+    /**
+     * 3. Rechercher l'utilisateur en base de données
+     */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
+        // Validation du jeton CSRF
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
@@ -71,12 +81,15 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
         if (!$user) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Pseudo could not be found.');
+            throw new CustomUserMessageAuthenticationException('Pseudo inconnue.');
         }
 
         return $user;
     }
 
+    /**
+     * 4. Vérification du mot de passe
+     */
     public function checkCredentials($credentials, UserInterface $user)
     {
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
@@ -90,6 +103,9 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         return $credentials['password'];
     }
 
+    /**
+     * 5. Que faire après avoir connecté l'utilisateur ?
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {

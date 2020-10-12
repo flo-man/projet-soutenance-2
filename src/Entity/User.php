@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -20,6 +21,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Adresse email manquante.")
+     * @Assert\Email(message="Veuillez indiquer une adresse valide.")
+     * @Assert\Length(max="180", maxMessage="L'adresse ne peut contenir plus de 180 caractères.")
      */
     private $pseudo;
 
@@ -29,6 +33,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * @var string The hashed password
      * @ORM\Column(type="string")
      */
     private $password;
