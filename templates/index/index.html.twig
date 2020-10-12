@@ -2,7 +2,7 @@
 
 {% block body %}
     <div>
-    <h1 style="text-align: center">BIENVENUE CHEZ KOMBI TOYS !</h1>
+        <h1 style="text-align: center">BIENVENUE CHEZ KOMBI TOYS !</h1>
         <div class="container" style="display: flex; justify-content: space-around">
             <div id="carouselExampleSlidesOnly" class="carousel slide w-60" data-ride="carousel">
                 <div class="carousel-inner">
@@ -37,5 +37,40 @@
                 </div>
             </div>
         </div>
+    </div>
+{# nouvéauté et promotion #}
+    <div style="display: flex; justify-content: space-around; margin-top: 100px " >
+        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+            <div class="card-header" style="text-align: center; font-size: x-large; color: darkblue " ><b>Nouveautées</b></div>
+            <div class="card-body">
+                <img  style="width: 250px" src="{{ asset('/img/nouveaute.jpg') }}" class="d-block w-15" alt="...">
+            </div>
+        </div>
+
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+            <div class="card-header" style="text-align: center; font-size: x-large; color: darkblue " ><b>Promotions</b></div>
+            <div class="card-body">
+                <img style="width: 250px" src="{{ asset('/img/promotion.jpg') }}" class="d-block w-15" alt="...">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="card mb-3" style="max-width: 540px; margin-right: 400px ">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="..." class="card-img" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Thisnger.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 {% endblock %}
