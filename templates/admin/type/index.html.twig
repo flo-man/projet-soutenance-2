@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Gestion des types</h1>
+
+    <a class="btn btn-outline-primary mb-3" href="{{ path('app_admin_type_edit') }}">
+        Nouveau type
+    </a>
+
+    <table class="table">
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        {% for type in types %}
+            <tr>
+                <td>{{ type.id }}</td>
+                <td>{{ type.nom }}</td>
+                <td>{{ type.description }}</td>
+                <td>
+                    <a class="btn btn-outline-primary" href={{ path('app_admin_type_edit', {'id': type.id}) }}>
+                        Modifier
+                    </a>
+                    <a class="btn btn-outline-danger" href="{{ path('admin_type_delete', {'id': type.id}) }}">
+                        Supprimer
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

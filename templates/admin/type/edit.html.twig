@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="text-center">Edition d'un type</h1>
+
+    <div class="row justify-content-md-center">
+        <div class="col-lg-6">
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.nom) }}
+            {{ form_row(form.description) }}
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary">
+                    Envoyer
+                </button>
+                <a href="{{ path('app_admin_type_index') }}" class="btn btn-outline-primary">
+                    Retour
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}
+

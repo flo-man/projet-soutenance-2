@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Produit;
+use App\Form\ConfirmationType;
 use App\Form\ProduitFormType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -81,16 +82,14 @@ class ProduitController extends AbstractController
      */
     public function delete(Produit $produit, Request $request, EntityManagerInterface $em)
     {
-        /*
-        $form = $this->createForm(ConfirmationType::class); TODO
+        $form = $this->createForm(ConfirmationType::class);
         $form->handleRequest($request);
-        */
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em->remove($produit);
             $em->flush();
 
-            $this->addFlash('info', 'le produit ' . $produit->getTitle() . ' a bien été supprimé.');
+            $this->addFlash('info', 'le produit ' . $produit->getNom() . ' a bien été supprimé.');
             return $this->redirectToRoute('admin_produit_list');
         }
 
