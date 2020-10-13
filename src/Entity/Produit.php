@@ -41,6 +41,11 @@ class Produit
      */
     private $prix;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $type;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,6 +97,18 @@ class Produit
     public function setPrix(string $prix): self
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
