@@ -11,24 +11,24 @@
                     min-height: 10vh;
                     background: darkslateblue;
                 }
-                ul li {
+                .navbar-custom ul li {
                     min-width: 15vh;
                     text-align: center;
                     line-height: 8vh;
                 }
-                ul li:nth-child(1) {
+                .navbar-custom ul li:nth-child(1) {
                     background-color: #e7c50a;
                     color: #000;
                 }
-                ul li:nth-child(2), .dropdown-menu-2 {
+                .navbar-custom ul li:nth-child(2), .dropdown-menu-2 {
                     background-color: #e70a9c;
                     color: #fff;
                 }
-                ul li:nth-child(3) {
+                .navbar-custom ul li:nth-child(3) {
                     background-color: #13fed6;
                     color: #033;
                 }
-                ul li:nth-child(4) {
+                .navbar-custom ul li:nth-child(4) {
                     background-color: hotpink;
                     color: #033;
                 }
@@ -45,18 +45,36 @@
     </head>
     <body>
     {% if is_granted('ROLE_ADMIN') %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#">Admin</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAdmin" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand text-center">Admin</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link" href="#">Inventaire</a>
-                        <a class="nav-link" href="#">Clients</a>
-                        <a class="nav-link" href="#">Connexion / Déconnexion</a>
-                    </div>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Inventaire
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ path('admin_produit_list') }}">Produits</a>
+                                <a class="dropdown-item" href="{{ path('app_admin_type_index') }}">Types de produit</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Clients et commandes
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Clients</a>
+                                <a class="dropdown-item" href="#">Commandes</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>

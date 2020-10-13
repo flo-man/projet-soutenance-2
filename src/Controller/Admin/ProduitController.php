@@ -42,6 +42,8 @@ class ProduitController extends AbstractController
              */
             $produit = $form->getData();
 
+            $destination = $this->getParameter("dossier_images");
+
             $em->persist($produit);
             $em->flush();
 

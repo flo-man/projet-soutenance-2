@@ -20,7 +20,7 @@ class ProduitFormType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('description', TextType::class)
-            ->add('photo', FileType::class)
+            ->add('photo', FileType::class, ["mapped" => false])
             ->add('prix', MoneyType::class)
             ->add('type', EntityType::class, [
                 'class' => Type::class,
