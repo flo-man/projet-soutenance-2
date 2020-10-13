@@ -1,8 +1,8 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
-        mapping_types:
-            enum: string
+
+        # pour passer la BdD d'utf8mb4 par défaut à utf8
         charset: utf8
         default_table_options:
             charset: utf8
