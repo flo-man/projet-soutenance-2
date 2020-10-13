@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Modifier: {{ produit.nom }}
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Modifier le produit "{{ produit.nom }}"</h1>
+
+    {% include 'admin/article/_produit_form.html.twig' %}
+{% endblock %}
+

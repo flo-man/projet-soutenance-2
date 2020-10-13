@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Supprimer: {{ produit.nom }}
+{% endblock %}
+
+{% block body %}
+    <h1>Supprimer un produit</h1>
+
+    {{ form_start(delete_form) }}
+
+    {{ form_row(delete_form.confirmation, {
+        label: 'je confirme la suppression du produit ' ~ produit.nom
+    }) }}
+
+    <button type="submit" class="btn btn-danger">Supprimer</button>
+
+    {{ form_end(delete_form) }}
+{% endblock %}

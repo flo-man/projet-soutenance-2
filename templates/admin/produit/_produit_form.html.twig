@@ -1,0 +1,16 @@
+{{ form_start(produit_form) }}
+
+        {{ form_row(produit_form.nom, {label: 'Nom:'} ) }}
+        {{ form_row(produit_form.description, {label: 'Description:'} ) }}
+        {{ form_row(produit_form.photo, {label: 'Photo:'} ) }}
+        {{ form_row(produit_form.prix, {label: 'Prix:'} ) }}
+        {{ form_row(produit_form.type, {label: 'Type:'} ) }}
+
+<button type="submit" class="btn btn-success">
+    Enregistrer
+</button>
+<a href="{{ path('admin_produit_list') }}" class="btn btn-outline-danger">
+    Retour
+</a>
+
+{{ form_end(produit_form) }}
