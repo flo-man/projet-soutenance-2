@@ -101,12 +101,12 @@ class Produit
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?Type
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(?Type $type): self
     {
         $this->type = $type;
 
