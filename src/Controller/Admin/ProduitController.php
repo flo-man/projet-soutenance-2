@@ -37,20 +37,34 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /**
-             * @var Produit $produit
-             */
+
             $produit = $form->getData();
 
             $destination = $this->getParameter("dossier_images");
 
-            $em->persist($produit);
-            $em->flush();
+            if($photoTelechargee = $form->get("photo")->getData()){
 
-            $this->addFlash('success', 'le produit a été créé');
-            return $this->redirectToRoute('admin_produit_edit', [
-                'id' => $produit->getId()
-            ]);
+                $nomPhoto = pathinfo($photoTelechargee->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $nouveauNom = '';
+
+                $nouveauNom = str_replace(" ", "_", $nouveauNom);
+
+                $nouveauNom .= "-" . uniqid() . "." . $photoTelechargee->guessExtension();
+
+                $photoTelechargee->move($destination, $nouveauNom);
+
+                $produit->setPhoto($nouveauNom);
+
+                $em->persist($produit);
+
+                $em->flush();
+
+                $this->addFlash('success', 'le produit a été créé');
+                return $this->redirectToRoute('admin_produit_edit', [
+                    'id' => $produit->getId()
+                ]);
+            }
         }
 
         return $this->render('admin/produit/add.html.twig', [
