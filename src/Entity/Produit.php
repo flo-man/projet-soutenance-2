@@ -38,7 +38,8 @@ class Produit
     private $prix;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\ManyToOne(targetEntity=Type::class, inversedBy="produits")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $type;
 
@@ -108,4 +109,5 @@ class Produit
 
         return $this;
     }
+
 }
