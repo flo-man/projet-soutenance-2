@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TypeRepository::class)
- * @UniqueEntity(fields={"name"}, message="Ce type existe déjà")
+ * @UniqueEntity(fields={"nom"}, message="Ce type existe déjà")
  */
 class Type
 {
