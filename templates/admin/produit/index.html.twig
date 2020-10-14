@@ -32,7 +32,7 @@
                 <td>{{ produit.description }}</td>
                 <td>{{ produit.photo }}</td>
                 <td>{{ produit.prix }}</td>
-                <td>{{ produit.type }}</td>
+                <td>{{ produit.type.nom }}</td>
                 <td>
                     <a href="{{ path('admin_produit_edit', {id: produit.id}) }}" class="btn btn-outline-primary">
                         Modifier
