@@ -15,6 +15,20 @@ class IndexController extends AbstractController
         return $this->render('index/index.html.twig');
     }
 
+    /**
+     * @Route ("/apropos/", name="app_apropos")
+     */
+    public function apropos()
+    {
+        return $this->render('index/apropos.html.twig');
+    }
 
+    /**
+     * @Route ("/contact/", name="app_contact")
+     */
+    public function contact()
+    {
+        return $this->render('index/contact.html.twig');
+    }
 
 }

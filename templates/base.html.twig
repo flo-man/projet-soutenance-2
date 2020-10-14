@@ -40,6 +40,17 @@
                     width: 100px;
                     height: 100px;
                 }
+
+                footer{
+                    position:absolute;
+                    bottom:0;
+                    width:100%;
+                    height:60px;
+                    background-color: rgb(175, 175, 175)
+                }
+                body{
+                    position: relative;
+                }
             </style>
         {% endblock %}
     </head>
@@ -108,10 +119,10 @@
                             #}
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#">À Propos</a>
+                            <a class="nav-link" href="{{ path('app_apropos') }}">À Propos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Contact</a>
+                            <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
                         </li>
                     </ul>
                     <div>
@@ -152,62 +163,42 @@
         {% endblock %}
     </div>
 
-<footer style="background-color: rgb(175, 175, 175); height: 300px">
-    <div class="container" >
-        <div class="card-group">
-            <div class="card" style="background-color: rgb(175, 175, 175); border: none">
-               <div class="card-body">
-                    <h5 class="card-title">BOUTIQUE</h5>
-               </div>
-                <div class="card-footer" style="border: none">
-                    <a href="#">Peluche</a><br>
-                    <a href="#">Jeux de société</a><br>
-                    <a href="#">Lego</a><br>
-                    <a href="#">Playmobile</a>
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+        <div class="container-fluid text-center text-md-left">
+            <div class="row" style="background-color: rgb(175, 175, 175)">
+                <div class="col-md-4 mb-md-0 mb-4">
+                    <h5 class="text-uppercase">BOUTIQUE</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Peluches</a></li>
+                        <li><a href="#">Jeux de société</a></li>
+                        <li><a href="#">Lego</a></li>
+                        <li><a href="#">Playmobile</a></li>
+                    </ul>
                 </div>
-            </div>
-
-            <div class="card" style="background-color: rgb(175, 175, 175); border: none">
-                <div class="card-body">
-                    <h5 class="card-title">MON COMPTE</h5>
+                <div class="col-md-4 mb-md-0 mb-4">
+                    <h5 class="text-uppercase">MON COMPTE</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Profil</a></li>
+                        <li><a href="#">Echange</a></li>
+                        <li><a href="#">Remboursement</a></li>
+                    </ul>
                 </div>
-                <div class="card-footer" style="border: none">
-                    <a href="#">Profil</a><br>
-                    <a href="#">Echange et remboursement</a><br>
-                    <a href="#"></a><br>
-                    <a href="#"></a><br>
-                </div>
-            </div>
-
-            <div class="card" style="background-color: rgb(175, 175, 175); border: none">
-                <div class="card-body">
-                    <h5 class="card-title">A PROPOS</h5>
-                </div>
-                <div class="card-footer" style="border: none">
-                    <a style="color: black" href="#">Blog</a><br>
-                    <a href="#">Qui sommes nous ?</a><br>
-                    <a href="#"></a><br>
-                    <a href="#"></a><br>
-                </div>
-            </div>
-
-            <div class="card" style="background-color: rgb(175, 175, 175); border: none">
-                <div class="card-body">
-                    <h5 class="card-title">PAIEMENT</h5>
-                </div>
-                <div class="card-footer" style="border: none">
-                    <a href="#"><img style="width:59%" src="{{ asset('/img/carte.png') }}"></a><br>
-                    <a href="#"></a><br>
+                <div class="col-md-4 mb-md-0 mb-4">
+                    <h5 class="text-uppercase">MODE DE PAIEMENT</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">MasterCard</a></li>
+                        <li><a href="#">CB</a></li>
+                        <li><a href="#">American Express</a></li>
+                        <li><a href="#">VISA</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-
-            <p style="text-align: center"><a href="#">Mentions légales</a> - <a href="#">Conditions Générales de Vente</a> - <a href="#">Plan du site</a></p>
-        <p style="text-align: center">Copyright 2020 - La petite boutique de jouets en ligne</p>
-
-    </div>
-
-</footer>
+        <div class="footer-copyright text-center py-3" style="background-color: rgb(175, 175, 175)">© Octobre 2020 Copyright:
+            <a href="#"> GROUPE 3</a>
+        </div>
+    </footer>
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
