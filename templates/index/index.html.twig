@@ -44,7 +44,11 @@
             <div class="card-header" style="text-align: center; font-size: x-large; color: darkblue " ><b>Nouveautées</b></div>
             <div class="card-body">
                 <a href="#">
-                <img  style="width: 250px" src="{{ asset('/img/nouveaute.jpg') }}" class="d-block w-15" alt="...">
+                    {% for produit in produits %}
+                        {% if produit.nouveau == true %}
+                            <p>{{ produit.nom }}</p>
+                        {% endif %}
+                    {% endfor %}
                 </a>
             </div>
         </div>

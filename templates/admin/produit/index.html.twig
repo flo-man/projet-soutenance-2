@@ -20,6 +20,7 @@
             <th>Description</th>
             <th>Photo</th>
             <th>Prix</th>
+            <th>Nouveautée</th>
             <th>Type</th>
             <th>Actions</th>
         </tr>
@@ -32,6 +33,13 @@
                 <td>{{ produit.description }}</td>
                 <td><img src="{{ asset('img_produit/' ~ produit.photo) }}" style="width: 90px" alt="photo_produit"></td>
                 <td>{{ produit.prix }}</td>
+                <td>
+                    {% if produit.nouveau == 1 %}
+                        Oui
+                    {% elseif produit.nouveau == 0 %}
+                        Non
+                    {% endif %}
+                </td>
                 <td>{{ produit.type.nom }}</td>
                 <td>
                     <a href="{{ path('admin_produit_edit', {id: produit.id}) }}" class="btn btn-outline-primary">

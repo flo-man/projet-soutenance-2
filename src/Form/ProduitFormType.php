@@ -7,6 +7,7 @@ use App\Entity\Type;
 
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,6 +23,7 @@ class ProduitFormType extends AbstractType
             ->add('description', TextType::class)
             ->add('photo', FileType::class, ["mapped" => false])
             ->add('prix', MoneyType::class)
+            ->add('nouveau', CheckboxType::class)
             ->add('type', EntityType::class, [
                 'class' => Type::class,
                 'choice_label' => 'nom'

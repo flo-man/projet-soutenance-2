@@ -43,6 +43,11 @@ class Produit
      */
     private $type;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $Nouveau;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,18 @@ class Produit
     public function setType(?Type $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getNouveau(): ?bool
+    {
+        return $this->Nouveau;
+    }
+
+    public function setNouveau(bool $Nouveau): self
+    {
+        $this->Nouveau = $Nouveau;
 
         return $this;
     }

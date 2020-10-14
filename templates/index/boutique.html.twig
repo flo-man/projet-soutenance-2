@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="list-group" id="list-tab" role="tablist">
+                    {% for type in types %}
+                        <a class="list-group-item list-group-item-action" id="list-home-list" href="{{ path('app_boutique_id', { id: type.id }) }}" role="tab" aria-controls="home">
+                            {{ type.nom }}
+                        </a>
+                    {% endfor %}
+
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="tab-content" id="nav-tabContent">
+                    {% for produit in produits %}
+                        <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="card" style="width: 18rem;">
+                                        <img class="card-img-top" src="{{ asset('img_produit/' ~ produit.photo) }}" alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ produit.nom }}</h5>
+                                            <p class="card-text">{{ produit.description }}</p>
+                                            <p class="card-text">{{ produit.prix }} €</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
