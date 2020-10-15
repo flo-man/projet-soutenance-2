@@ -69,8 +69,15 @@ class IndexController extends AbstractController
         ]);
     }
 
-    public function nouveau()
+    /**
+     * @Route ("/nouveau", name="app_nouveau")
+     */
+    public function nouveau(ProduitRepository $produitRepository)
     {
+        $produits = $produitRepository->findAll();
+        return $this->render('index/nouveau.html.twig', [
+            'produits' => $produits
+        ]);
 
     }
 }

@@ -38,51 +38,33 @@
             </div>
         </div>
     </div>
-{# nouvéauté et promotion #}
-    <div style="display: flex; justify-content: space-around; margin-top: 30px " >
-        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-            <div class="card-header" style="text-align: center; font-size: x-large; color: darkblue " ><b>Nouveautées</b></div>
-            <div class="card-body">
-                <a href="#">
-                    {% for produit in produits %}
-                        {% if produit.nouveau == true %}
-                            <p>{{ produit.nom }}</p>
-                        {% endif %}
-                    {% endfor %}
-                </a>
-            </div>
-        </div>
+{# nouvéauté et sac à jouet #}
 
-        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-            <div class="card-header" style="text-align: center; font-size: x-large; color: darkblue " ><b>Promotions</b></div>
-            <div class="card-body">
-                <a href="#">
-                <img style="width: 250px" src="{{ asset('/img/promotion.jpg') }}" class="d-block w-15" alt="...">
-                </a>
+    <div class="card mb-3">
+        <div class="card-body justify-content-around" style="background: #B0413E; color: white; display: flex">
+            <h3 class="card-title align">Nouveautées</h3>
+            <div>
+                {% for produit in produits %}
+                    {% if produit.nouveau == 1 %}
+                        <p class="card-text">
+                            <a href="#">{{ produit.nom }}</a>
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div>
+                <img src="{{ asset('img/Kombi_Toys.png') }}" class="card-img-bottom" alt="..." style="height: 200px; width: 200px">
             </div>
         </div>
     </div>
 
-        <div class="card mb-3" style="width: 650px; margin-left: 350px; background-color: #380085">
-            <div class="row no-gutters">
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: white">Découvrer notre spécialité :</h5>
-                        <h5 class="card-title" style="color: white">le sac à jouet !</h5>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <a href="#">
-                    <img src="{{ asset('/img/336566_tn.jpg') }}" class="card-img" alt="...">
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <div class="card-body">
-                        <h5 class="card-title" style="color: white; margin-top: 60px">39,90€</h5>
-                        <p class="card-text"><small style="color: white">(frais de port inclus)</small></p>
-                    </div>
-                </div>
-            </div>
+    <div class="card mb-3">
+        <div class="card-body" style="background: #380058; color: white">
+            <h5 class="card-title">Notre spécialité</h5>
+            <p class="card-text">Le sac à jouet, l'accessoire indispensable pour la famille</p>
         </div>
+        <img src="{{ asset('img/336566_tn.jpg') }}" class="card-img-bottom" alt="..." style="height: 200px; width: 200px">
+    </div>
+
 
 {% endblock %}

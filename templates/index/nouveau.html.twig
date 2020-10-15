@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 style="text-align: center">NOUVEAUTÉES</h1>
+        <div class="row">
+            {% for produit in produits %}
+                {% if produit.nouveau == 1 %}
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('img_produit/' ~ produit.photo) }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ produit.nom }}</h5>
+                                <p class="card-text">{{ produit.description }}</p>
+                                <p class="card-text">{{ produit.prix }} €</p>
+                                <a href="#" class="btn btn-primary">Ajouter au panier</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+
+
+
+
+    </div>
+{% endblock %}
+
