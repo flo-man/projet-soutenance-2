@@ -83,6 +83,33 @@ class ProduitController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $destination = $this->getParameter("dossier_images");
+
+            if($photoTelechargee = $form->get("photo")->getData()){
+
+                $nomPhoto = pathinfo($photoTelechargee->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $nouveauNom = '';
+
+                $nouveauNom = str_replace(" ", "_", $nouveauNom);
+
+                $nouveauNom .= "-" . uniqid() . "." . $photoTelechargee->guessExtension();
+
+                $photoTelechargee->move($destination, $nouveauNom);
+
+                $produit->setPhoto($nouveauNom);
+
+                $em->persist($produit);
+
+                $em->flush();
+
+                $this->addFlash('success', 'le produit a été créé');
+                return $this->redirectToRoute('admin_produit_edit', [
+                    'id' => $produit->getId()
+                ]);
+            }
+
             $em->flush();
             $this->addFlash('success', 'Produit mis à jour' );
         }

@@ -21,9 +21,14 @@ class ProduitFormType extends AbstractType
         $builder
             ->add('nom', TextType::class)
             ->add('description', TextType::class)
-            ->add('photo', FileType::class, ["mapped" => false])
+            ->add('photo', FileType::class, [
+                "mapped" => false,
+                "required" => false
+            ])
             ->add('prix', MoneyType::class)
-            ->add('nouveau', CheckboxType::class)
+            ->add('nouveau', CheckboxType::class, [
+                'required' => false,
+            ])
             ->add('type', EntityType::class, [
                 'class' => Type::class,
                 'choice_label' => 'nom'
