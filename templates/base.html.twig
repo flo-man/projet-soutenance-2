@@ -108,7 +108,7 @@
                                 <a class="dropdown-item" href="{{ path('app_boutique') }}">Produits par catégorie</a>
                             </div>
                         <li>
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="{{ path('account') }}" role="button" aria-haspopup="true" aria-expanded="false">
                                 Mon Compte
                             </a>
                             {#
@@ -132,7 +132,7 @@
                         </form>
                         <div class="perso pt-2">
                             <div>
-                                <a href="{{ path('account') }}"><i class="far fa-user-circle fa-2x text-white"></i></a>
+                                <a href="{{ path('app_login') }}"><i class="far fa-user-circle fa-2x text-white"></i></a>
                             </div>
                             <div class="mt-2 text-white">
                                 <p>0,00 €</p>
@@ -165,7 +165,7 @@
 
     <!-- Footer -->
     <footer class="page-footer font-small blue pt-4">
-        <div class="container-fluid text-center text-md-left">
+        <div class="container text-center text-md-left">
             <div class="row" style="background-color: rgb(175, 175, 175)">
                 <div class="col-md-4 mb-md-0 mb-4">
                     <h5 class="text-uppercase">BOUTIQUE</h5>

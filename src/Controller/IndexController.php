@@ -68,4 +68,9 @@ class IndexController extends AbstractController
             'produits' => $produits
         ]);
     }
+
+    public function nouveau()
+    {
+
+    }
 }
