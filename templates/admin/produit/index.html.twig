@@ -48,6 +48,10 @@
                     <a href="{{ path('admin_produit_delete', {id: produit.id}) }}" class="btn btn-outline-danger">
                         Supprimer
                     </a>
+                    <a href="{{ path('panier_ajout', {'id': produit.id}) }}" class="btn btn-outline-danger">
+                        Ajouter au panier
+                    </a>
+
                 </td>
             </tr>
         {% endfor %}
