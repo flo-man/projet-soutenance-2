@@ -24,23 +24,24 @@ class PanierService {
         }
         $this->session->set('panier', $panier);}
 
-    public function remove($id, PanierService $panierService)
+    public function remove($id)
     {
         $panier=$this->session->get('panier', []);
 
+        if($panier[$id] > 1){
+            $panier[$id]--;
+        }else {
+            unset($panier[$id]);
+        }
+        $this->session->set('panier', $panier);}
+
+    public function delete($id)
+    {
+        $panier=$this->session->get('panier', []);
         if(!empty($panier[$id])){
             unset($panier[$id]);
         }
         $this->session->set('panier', $panier);
-    }
-    public function delete(int $id)
-    {
-        $panier=$this->session->get('panier', []);
-        if(!empty($panier[$id])){
-            unset($panier[$id]);
-        }
-        $this->session->set('panier', $panier);
-
     }
 
     public function getFullPanier(ProduitRepository $produitRepository) : array
@@ -68,11 +69,11 @@ class PanierService {
     }
 
 
-    public function getTotal() : float
+    public function getTotal(ProduitRepository $produitRepository) : float
     {
         $total=0;
 
-        foreach ($this->getFullPanier() as $item){
+        foreach ($this->getFullPanier($produitRepository) as $item){
 
             $total += $item['produit']->getPrix() * $item['quantite'];
         }

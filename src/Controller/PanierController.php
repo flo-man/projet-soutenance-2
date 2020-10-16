@@ -38,13 +38,15 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/panier/{id}", name="panier_remove")
+     * @Route("/panier-remove/{id}", name="panier_remove")
      */
     public function remove(int $id, PanierService $panierService)
     {
         $panierService->remove($id);
 
-        return $this->redirectToRoute("index");
+        return $this->redirectToRoute("affichage_panier", [
+            "panierService" => $panierService
+        ]);
     }
 
 
@@ -55,7 +57,8 @@ class PanierController extends AbstractController
     {
 
         return $this->render('panier/index.html.twig', [
-            'panierService' => $panierService->getFullPanier($produitRepository)
+            'panierService' => $panierService->getFullPanier($produitRepository),
+            'cartTotal' => $panierService->getTotal($produitRepository)
         ]);
     }
 

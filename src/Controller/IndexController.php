@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Repository\ProduitRepository;
 use App\Repository\TypeRepository;
+use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +16,12 @@ class IndexController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(ProduitRepository $produitRepository)
+    public function index(PanierService $panierService, ProduitRepository $produitRepository)
     {
         $produits = $produitRepository->findAll();
 
         return $this->render('index/index.html.twig', [
-            'produits' => $produits
+            'produits' => $produits,
         ]);
     }
 
@@ -78,6 +79,14 @@ class IndexController extends AbstractController
         return $this->render('index/nouveau.html.twig', [
             'produits' => $produits
         ]);
+
+    }
+
+    /**
+     * @Route("/recherche")
+     */
+    public function recherche()
+    {
 
     }
 }

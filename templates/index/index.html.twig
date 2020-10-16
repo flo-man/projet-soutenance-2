@@ -42,12 +42,12 @@
 
     <div class="card mb-3">
         <div class="card-body justify-content-around" style="background: #B0413E; color: white; display: flex">
-            <h3 class="card-title align">Nouveautées</h3>
+            <h3 class="card-title align">Nouveautés</h3>
             <div>
                 {% for produit in produits %}
                     {% if produit.nouveau == 1 %}
                         <p class="card-text">
-                            <a href="#">{{ produit.nom }}</a>
+                            <a href="{{ path('app_nouveau') }}">{{ produit.nom }}</a>
                         </p>
                     {% endif %}
                 {% endfor %}
