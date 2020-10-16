@@ -2,6 +2,7 @@
 
 namespace App\Service\Panier;
 
+use App\Repository\ProduitRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class PanierService {
@@ -42,7 +43,7 @@ class PanierService {
 
     }
 
-    public function getFullPanier() : array
+    public function getFullPanier(ProduitRepository $produitRepository) : array
     {
         $panier = $this->session->get('panier', []);
 

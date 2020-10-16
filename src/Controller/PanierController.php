@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+/**
+ * @Route ("/")
+ */
 class PanierController extends AbstractController
 {
     protected $session;
@@ -29,11 +32,13 @@ class PanierController extends AbstractController
     public function add(int $id, PanierService $panierService)
     {
         $panierService->add($id);
-        return $this->redirectToRoute("index");
+        return $this->redirectToRoute("index", [
+            "panierService" => $panierService
+        ]);
     }
 
     /**
-     * @Route("/panier", name="panier_remove")
+     * @Route("/panier/{id}", name="panier_remove")
      */
     public function remove(int $id, PanierService $panierService)
     {
@@ -42,15 +47,15 @@ class PanierController extends AbstractController
         return $this->redirectToRoute("index");
     }
 
+
     /**
      * @Route("/panier", name="affichage_panier")
      */
     public function affichagePanier(PanierService $panierService)
     {
-        $panierService = $panierService->getFullPanier();
 
         return $this->render('panier/index.html.twig', [
-            'panier' => $panierService
+            'panierService' => $panierService
         ]);
     }
 

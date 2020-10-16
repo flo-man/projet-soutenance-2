@@ -10,14 +10,15 @@
     </style>
 
     <div class="example-wrapper">
-        <h1>Hello ! ✅</h1>
+        <h1>Votre panier</h1>
 
-        <p>This friendly message is coming from:</p>
+        <p>Ici le contenu du panier</p>
 
-        <a href="{{ path('panier_ajout', {'id': 'x'}) }}"></a>
     </div>
+    {{ dump(panierService) }}
 
-    {% if items | length > 0 %}
+    {#
+    {% if panierService.fullPanier | length > 0 %}
         <thead>
         <tr>
             <th>Produit</th>
@@ -29,11 +30,11 @@
         </thead>
         <tbody>
         <tr>
-            <td>{{ item.produit.title }}</td>
-            <td>{{ item.produit.price }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.produit.price * item.quantity }}</td>
-            <td><a href="{{ path('panier_supprimer', {'id': item.produit.id}) }}" class="btn btn-danger btn-sm">
+            <td>{{ panierService }}</td>
+            <td>{{ panierService.produit.price }}</td>
+            <td>{{ panierService.quantity }}</td>
+            <td>{{ panierService.produit.price * panierService.quantity }}</td>
+            <td><a href="{{ path('panier_remove', {'id': panierService.produit.id}) }}" class="btn btn-danger btn-sm">
                     <i class="fas fa-trash"></i>
                 </a>
             </td>
@@ -51,5 +52,5 @@
     {% else  %}
         <p>Panier vide :(</p>
     {% endif %}
-
+    #}
 {% endblock %}
