@@ -42,7 +42,9 @@
                 <p>Votre panier est vide</p>
             {% endif %}
         </table>
-
+        {% if panierService | length > 0 %}
+            <a href="#" class="btn btn-success mb-2">Valider ma commande</a>
+        {% endif %}
     </div>
 
 

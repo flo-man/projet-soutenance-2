@@ -20,7 +20,7 @@
             <th>Description</th>
             <th>Photo</th>
             <th>Prix</th>
-            <th>Nouveautée</th>
+            <th>Nouveauté</th>
             <th>Type</th>
             <th>Actions</th>
         </tr>
@@ -47,9 +47,6 @@
                     </a>
                     <a href="{{ path('admin_produit_delete', {id: produit.id}) }}" class="btn btn-outline-danger">
                         Supprimer
-                    </a>
-                    <a href="{{ path('panier_ajout', {'id': produit.id}) }}" class="btn btn-outline-danger">
-                        Ajouter au panier
                     </a>
 
                 </td>

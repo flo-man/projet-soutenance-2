@@ -4,10 +4,13 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Form\CommandeType;
+use App\Form\ProduitFormType;
 use App\Repository\ProduitRepository;
 use App\Service\Panier\PanierService;
 use phpDocumentor\Reflection\Types\AbstractList;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -62,6 +65,18 @@ class PanierController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/panier-commande-valider/{id}", name="commande_valider")
+     */
+    public function commandeValider(Request $request, PanierService $panierService)
+    {
+
+        $form = $this->createForm(CommandeType::class);
+
+        $form->handleRequest($request);
+
+        $this->addFlash('info', 'Commande validée');
+    }
 }
 
 
