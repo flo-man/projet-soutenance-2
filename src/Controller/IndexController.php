@@ -46,7 +46,7 @@ class IndexController extends AbstractController
     public function boutique(TypeRepository $typeRepository, ProduitRepository $produitRepository)
     {
         $types = $typeRepository->findAll();
-        $produits = $produitRepository->findAll();
+        $produits = $produitRepository->findAll(); 
 
         return $this->render('index/boutique.html.twig', [
             'types' => $types,

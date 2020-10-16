@@ -51,7 +51,7 @@ class PanierService {
         foreach ($panier as $id => $quantite){
             if ($quantite < 1){ $quantite = 0;}
             $panierDetail[]=[
-                'produit'=>$this->produitRepository->find($id),
+                'produit'=>$produitRepository->find($id),
                 'quantite'=>$quantite
             ];
         }

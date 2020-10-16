@@ -32,7 +32,7 @@ class PanierController extends AbstractController
     public function add(int $id, PanierService $panierService)
     {
         $panierService->add($id);
-        return $this->redirectToRoute("index", [
+        return $this->redirectToRoute("affichage_panier", [
             "panierService" => $panierService
         ]);
     }
@@ -51,11 +51,11 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier", name="affichage_panier")
      */
-    public function affichagePanier(PanierService $panierService)
+    public function affichagePanier(ProduitRepository $produitRepository, PanierService $panierService)
     {
 
         return $this->render('panier/index.html.twig', [
-            'panierService' => $panierService
+            'panierService' => $panierService->getFullPanier($produitRepository)
         ]);
     }
 
