@@ -8,6 +8,7 @@ use App\Repository\TypeRepository;
 use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -85,8 +86,25 @@ class IndexController extends AbstractController
     /**
      * @Route("/recherche")
      */
-    public function recherche()
+    public function recherche(Request $request, ProduitRepository $repo)
     {
+        $searchForm = $this->createForm(SearchType::class);
+        $searchForm->handleRequest($request);
 
+        $donnees = $repo->findAll();
+
+        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
+
+            $title = $searchForm->getData()->getTitle();
+
+            $donnees = $repo->search($title);
+
+            if ($donnees == null) {
+                $this->addFlash('erreur', 'Aucun article contenant ce mot clé dans le titre n\'a été trouvé, essayez en un autre.');
+
+            }
+        }
     }
+
+
 }
