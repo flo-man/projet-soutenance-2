@@ -9,6 +9,7 @@ use App\Form\TypeFormType;
 use App\Form\ConfirmationType;
 use App\Repository\TypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
  * @package App\Controller\Admin
  *
  * @Route("/admin/type")
+ * @IsGranted("ROLE_ADMIN")
  */
 class TypeController extends AbstractController
 {

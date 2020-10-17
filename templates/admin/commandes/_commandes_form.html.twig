@@ -1,0 +1,15 @@
+{{ form_start(commandes_form) }}
+
+        {{ form_row(commandes_form.date, {label: 'Date:'} ) }}
+        {{ form_row(commandes_form.client, {label: 'Client:'} ) }}
+        {{ form_row(commandes_form.produits, {label: 'Produits:'} ) }}
+        {{ form_row(commandes_form.facture, {label: 'Facture:'} ) }}
+
+<button type="submit" class="btn btn-success">
+    Passer commande manuellement
+</button>
+<a href="{{ path('admin_commandes_list') }}" class="btn btn-outline-danger">
+    Retour
+</a>
+
+{{ form_end(commandes_form) }}

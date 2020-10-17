@@ -1,26 +1,47 @@
-{{ form_start(user_form) }}
-    {{ form_row(user_form.pseudo, {label: 'Pseudo:'} ) }}
-    {{ form_row(user_form.plainPassword.first, {
-        label: 'Mot de passe:'
-    }) }}
-    {{ form_row(user_form.plainPassword.second, {
-        label: 'Répéter le mot de passe:'
-    }) }}
-    {{ form_row(user_form.email, {label: 'Email:'} ) }}
-    {{ form_row(user_form.nom, {label: 'Nom:'} ) }}
-    {{ form_row(user_form.prenom, {label: 'Prénom:'} ) }}
-    {{ form_row(user_form.adresse, {label: 'Adresse:'}) }}
-    {{ form_row(user_form.code_postal, {label: 'Code postal:'}) }}
-    {{ form_row(user_form.ville, {label: 'Ville:'}) }}
-    {{ form_row(user_form.telephone, {label: 'Téléphone:'}) }}
 
+    {{ form_start(user_form) }}
+    <form>
+        <div class="form-group">
+        {{ form_row(user_form.pseudo, {label: 'Pseudo:'}) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.plainPassword.first, {
+            label: 'Mot de passe:'
+        }) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.plainPassword.second, {
+            label: 'Répéter le mot de passe:'
+        }) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.email, {label: 'Email:'} ) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.nom, {label: 'Nom:'} ) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.prenom, {label: 'Prénom:'} ) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.adresse, {label: 'Adresse:'}) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.code_postal, {label: 'Code postal:'}) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.ville, {label: 'Ville:'}) }}
+        </div>
+        <div class="form-group">
+        {{ form_row(user_form.telephone, {label: 'Téléphone:'}) }}
+        </div>
 
-<button type="submit" class="btn btn-success">
-    Enregisrer
-</button>
+    <button type="submit" class="btn btn-success">
+        Enregisrer
+    </button>
 
-<a href="{{ path('app_login') }}" class="btn btn-outline-danger">
-    Retour
-</a>
-
-{{ form_end(user_form) }}
+    <a href="{{ path('app_login') }}" class="btn btn-outline-danger">
+        Retour
+    </a>
+    </form>
+    {{ form_end(user_form) }}

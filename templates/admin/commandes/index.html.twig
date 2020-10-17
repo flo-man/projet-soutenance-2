@@ -13,6 +13,18 @@
                 <th>Produit(s)</th>
                 <th>Facture </th>
             </tr>
+            {% for commande in commandes %}
+                <tr>
+                    <td>{{ commande.id }}</td>
+                    <td>{{ commande.client.pseudo }}</td>
+                    <td> {% if commande.produits | length > 0 %}
+                        {% for ligne in commande.produits %}
+                            {{ ligne.nom }} |
+                        {% endfor %}
+                    {% endif %} </td>
+                    <td>{{ commande.facture }} €</td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 {% endblock %}

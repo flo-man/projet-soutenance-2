@@ -12,9 +12,11 @@
                     background: darkslateblue;
                 }
                 .navbar-custom ul li {
-                    min-width: 15vh;
+                    min-width: 10vh;
                     text-align: center;
-                    line-height: 8vh;
+                    max-height: 6vh;
+                    border-radius: 10px;
+                    margin: 0 5px;
                 }
                 .navbar-custom ul li:nth-child(1) {
                     background-color: #e7c50a;
@@ -36,9 +38,9 @@
                     display: flex;
                     justify-content: space-between;
                 }
-                nav img {
-                    width: 100px;
-                    height: 100px;
+                .navbar img {
+                    width: 11vh;
+                    height: 11vh;
                 }
 
                 footer{
@@ -50,6 +52,10 @@
                 }
                 body{
                     position: relative;
+                }
+
+                .navbar {
+                    font-size: large;
                 }
             </style>
         {% endblock %}
@@ -79,7 +85,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Clients</a>
-                                <a class="dropdown-item" href="#">Commandes</a>
+                                <a class="dropdown-item" href="{{ path('admin_commandes_list') }}">Commandes</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -130,7 +136,7 @@
                                 <p>{% if cartTotal is defined %}
                                         {{ cartTotal }} €
                                         {% else %}
-                                            0,00 €
+                                            0 €
                                     {% endif %}
                                 </p>
                             </div>
@@ -171,28 +177,23 @@
                 <div class="col-md-4 mb-md-0 mb-4">
                     <h5 class="text-uppercase">BOUTIQUE</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#">Peluches</a></li>
-                        <li><a href="#">Jeux de société</a></li>
-                        <li><a href="#">Lego</a></li>
-                        <li><a href="#">Playmobile</a></li>
+                        <li><a href="{{ path('app_nouveau') }}">Nouveautés</a></li>
+                        <li><a href="{{ path('app_boutique') }}">Catégories</a></li>
+                        <li><a href="{{ path('app_apropos') }}">A propos</a></li>
+                        <li><a href="{{ path('app_contact') }}">Contact</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-md-0 mb-4">
                     <h5 class="text-uppercase">MON COMPTE</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#">Profil</a></li>
-                        <li><a href="#">Echange</a></li>
-                        <li><a href="#">Remboursement</a></li>
+                        <li><a href="{{ path('accountuser_account') }}">Profil</a></li>
+                        <li><a>Echange</a></li>
+                        <li><a>Remboursement</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4 mb-md-0 mb-4">
                     <h5 class="text-uppercase">MODE DE PAIEMENT</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">MasterCard</a></li>
-                        <li><a href="#">CB</a></li>
-                        <li><a href="#">American Express</a></li>
-                        <li><a href="#">VISA</a></li>
-                    </ul>
+                    <img src="{{ asset('img/carte.png') }}" style="width: 35%" alt="cb">
                 </div>
             </div>
         </div>
