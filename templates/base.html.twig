@@ -14,7 +14,7 @@
                 .navbar-custom ul li {
                     min-width: 10vh;
                     text-align: center;
-                    max-height: 6vh;
+                    min-height: 6vh;
                     border-radius: 10px;
                     margin: 0 5px;
                 }
@@ -84,7 +84,7 @@
                                 Clients et commandes
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Clients</a>
+                                <a class="dropdown-item" href="{{ path('client_liste') }}">Clients</a>
                                 <a class="dropdown-item" href="{{ path('admin_commandes_list') }}">Commandes</a>
                             </div>
                         </li>
@@ -108,6 +108,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Boutique
+                            <div><i class="fas fa-store fa-2x pt-2"></i></div>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ path('app_nouveau') }}">Nouveautés</a>
@@ -116,12 +117,19 @@
                         <li>
                             <a class="nav-link" href="{{ path('accountuser_account') }}" role="button" aria-haspopup="true" aria-expanded="false">
                                 Mon Compte
+                                <div><i class="fas fa-user-edit fa-2x pt-2"></i></div>
                             </a>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_apropos') }}">À Propos</a>
+                            <a class="nav-link" href="{{ path('app_apropos') }}">
+                                À Propos
+                                <div><i class="fas fa-question fa-2x pt-2"></i></div>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+                            <a class="nav-link" href="{{ path('app_contact') }}">
+                                Contact
+                                <div><i class="far fa-paper-plane fa-2x pt-2"></i></div>
+                            </a>
                         </li>
                     <div class="ml-5">
                         <form class="form-inline my-2 my-lg-0">
@@ -133,8 +141,8 @@
                                 <a href="{{ path('app_login') }}"><i class="far fa-user-circle fa-2x text-white"></i></a>
                             </div>
                             <div class="mt-2 text-white">
-                                <p>{% if cartTotal is defined %}
-                                        {{ cartTotal }} €
+                                <p>{% if panierTotal is defined %}
+                                        {{ panierTotal }} €
                                         {% else %}
                                             0 €
                                     {% endif %}
@@ -192,7 +200,7 @@
                     </ul>
                 </div>
                 <div class="col-md-4 mb-md-0 mb-4">
-                    <h5 class="text-uppercase">MODE DE PAIEMENT</h5>
+                    <h5 class="text-uppercase">MODES DE PAIEMENT</h5>
                     <img src="{{ asset('img/carte.png') }}" style="width: 35%" alt="cb">
                 </div>
             </div>

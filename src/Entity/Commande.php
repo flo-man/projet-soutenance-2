@@ -40,6 +40,11 @@ class Commande
      */
     private $facture;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantite;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
@@ -108,6 +113,18 @@ class Commande
     public function setFacture(string $facture): self
     {
         $this->facture = $facture;
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

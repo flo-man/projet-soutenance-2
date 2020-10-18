@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\ProduitFormType;
 use App\Form\UserProfileFormType;
+use App\Repository\ProduitRepository;
+use App\Service\Panier\PanierService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,8 +23,9 @@ class AccountController extends AbstractController
      * @Route("/", name="user_account")
      * @IsGranted("ROLE_USER")
      */
-    public function index(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $userPasswordEncoder)
+    public function index(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $userPasswordEncoder, PanierService $panierService, ProduitRepository $produitRepository)
     {
+        $panierTotal = $panierService->getTotal($produitRepository);
         $email = $this->getUser()->getEmail();
 
         $form = $this->createForm(UserProfileFormType::class, $this->getUser());
@@ -46,14 +49,16 @@ class AccountController extends AbstractController
 
         return $this->render('account/index.html.twig', [
             'user_form' => $form->createView(),
+            'panierTotal' => $panierTotal
         ]);
     }
 
     /**
      * @Route("/inscription", name="user_inscription")
      */
-    public function inscription(UserProfileFormType $userProfileFormType, Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $userPasswordEncoder)
+    public function inscription(UserProfileFormType $userProfileFormType, Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $userPasswordEncoder, ProduitRepository $produitRepository, PanierService $panierService)
     {
+        $panierTotal = $panierService->getTotal($produitRepository);
         $form = $this->createForm(UserProfileFormType::class);
 
         $form->handleRequest($request);
@@ -79,7 +84,8 @@ class AccountController extends AbstractController
         }
 
         return $this->render('account/inscription.html.twig', [
-            'user_form' => $form->createView()
+            'user_form' => $form->createView(),
+            'panierTotal' => $panierTotal
         ]);
     }
 }

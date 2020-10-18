@@ -7,7 +7,7 @@
     <div class="container">
             <h1>Votre panier</h1>
 
-        <table class="table">
+        <table class="table" id="cart-content" data-route="{{ path('affichage_panier') }}">
             <tr>
                 <th>Produit</th>
                 <th>Prix</th>
@@ -19,9 +19,9 @@
             {% if panierService | length > 0 %}
                 {% for ligne in panierService %}
                     <tr>
-                        <td>{{ ligne.produit.nom }}</td>
+                        <td data-item-id="item{{ loop.index }}">{{ ligne.produit.nom }}</td>
                         <td>{{ ligne.produit.prix }}</td>
-                        <td>{{ ligne.quantite }}</td>
+                        <td data-quantity="{{ ligne.quantite }}">{{ ligne.quantite }}</td>
                         <td>{{ ligne.quantite * ligne.produit.prix }} €</td>
                         <td>
                             <a href="{{ path('panier_ajout', {id: ligne.produit.id}) }}" class="btn btn-outline-success">+</a>
@@ -35,56 +35,36 @@
                         TOTAL
                     </th>
                     <td>
-                        <b>{{ total }} </b>€
+                        <b data-total="{{ total }}">{{ total }} </b>€
                     </td>
                 </tr>
             {% else %}
                 <p>Votre panier est vide</p>
             {% endif %}
         </table>
+        {#
+        <h1>zone de test panier -> checkout</h1>
+        <div>
+            {% for produit in panierService %}
+                <div>
+                    <span>le produits : {{ produit.produit.nom }}</span>
+                </div>
+                <span>la quantité : {{ produit.quantite }}</span>
+            {% endfor %}
+            <div>
+                <span> le client : {{ app.user.username }}</span>
+            </div>
+            <div>
+                <span> le total : {{ total }}</span>
+            </div>
+        </div>
+        #}
+
         {% if panierService | length > 0 %}
-            <a href="#" class="btn btn-success mb-2">Valider ma commande</a>
+            <form type="POST">
+                <button type="submit" class="btn btn-success mb-2">Valider ma commande</button>
+            </form>
         {% endif %}
     </div>
 
-
-    
-    
-
-    {#
-    {% if panierService.fullPanier | length > 0 %}
-        <thead>
-        <tr>
-            <th>Produit</th>
-            <th>Prix</th>
-            <th>Quantité</th>
-            <th>Total</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>{{ panierService }}</td>
-            <td>{{ panierService.produit.price }}</td>
-            <td>{{ panierService.quantity }}</td>
-            <td>{{ panierService.produit.price * panierService.quantity }}</td>
-            <td><a href="{{ path('panier_remove', {'id': panierService.produit.id}) }}" class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash"></i>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="3" class="text-right" > Total : </td>
-            <td>{{ total }}</td>
-            <td></td>
-        </tr>
-        </tfoot>
-
-
-    {% else  %}
-        <p>Panier vide :(</p>
-    {% endif %}
-    #}
 {% endblock %}

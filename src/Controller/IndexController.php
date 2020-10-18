@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Produit;
+
 use App\Repository\ProduitRepository;
 use App\Repository\TypeRepository;
 use App\Service\Panier\PanierService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,65 +19,79 @@ class IndexController extends AbstractController
     public function index(PanierService $panierService, ProduitRepository $produitRepository)
     {
         $produits = $produitRepository->findAll();
+        $panierTotal = $panierService->getTotal($produitRepository);
 
         return $this->render('index/index.html.twig', [
             'produits' => $produits,
+            'panierTotal' => $panierTotal
         ]);
     }
 
     /**
      * @Route ("/apropos/", name="app_apropos")
      */
-    public function apropos()
+    public function apropos(PanierService $panierService, ProduitRepository $produitRepository)
     {
-        return $this->render('index/apropos.html.twig');
+        $panierTotal = $panierService->getTotal($produitRepository);
+        return $this->render('index/apropos.html.twig', [
+            'panierTotal' => $panierTotal
+        ]);
     }
 
     /**
      * @Route ("/contact/", name="app_contact")
      */
-    public function contact()
+    public function contact(PanierService $panierService, ProduitRepository $produitRepository)
     {
-        return $this->render('index/contact.html.twig');
+        $panierTotal = $panierService->getTotal($produitRepository);
+        return $this->render('index/contact.html.twig', [
+            'panierTotal' => $panierTotal
+        ]);
     }
 
     /**
      * @Route ("/boutique", name="app_boutique")
      */
-    public function boutique(TypeRepository $typeRepository, ProduitRepository $produitRepository)
+    public function boutique(TypeRepository $typeRepository, ProduitRepository $produitRepository, PanierService $panierService)
     {
         $types = $typeRepository->findAll();
-        $produits = $produitRepository->findAll(); 
+        $produits = $produitRepository->findAll();
+        $panierTotal = $panierService->getTotal($produitRepository);
 
         return $this->render('index/boutique.html.twig', [
             'types' => $types,
-            'produits' => $produits
+            'produits' => $produits,
+            'panierTotal' => $panierTotal
         ]);
     }
 
     /**
      * @Route ("/boutique/{id}", name="app_boutique_id")
      */
-    public function type($id, TypeRepository $typeRepository, ProduitRepository $produitRepository)
+    public function type($id, TypeRepository $typeRepository, ProduitRepository $produitRepository, PanierService $panierService)
     {
         $type = $typeRepository->find($id);
         $types = $typeRepository->findAll();
         $produits = $type->getProduits();
+        $panierTotal = $panierService->getTotal($produitRepository);
 
         return $this->render('index/boutique.html.twig', [
             'types' => $types,
-            'produits' => $produits
+            'produits' => $produits,
+            'panierTotal' => $panierTotal
         ]);
     }
 
     /**
      * @Route ("/nouveau", name="app_nouveau")
      */
-    public function nouveau(ProduitRepository $produitRepository)
+    public function nouveau(ProduitRepository $produitRepository, PanierService $panierService)
     {
         $produits = $produitRepository->findAll();
+        $panierTotal = $panierService->getTotal($produitRepository);
         return $this->render('index/nouveau.html.twig', [
-            'produits' => $produits
+            'produits' => $produits,
+            'panierTotal' => $panierTotal
         ]);
 
     }
