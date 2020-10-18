@@ -42,23 +42,24 @@
                 <p>Votre panier est vide</p>
             {% endif %}
         </table>
-        {#
+
         <h1>zone de test panier -> checkout</h1>
         <div>
             {% for produit in panierService %}
                 <div>
-                    <span>le produits : {{ produit.produit.nom }}</span>
+                    <span>le produit : {{ produit.produit.nom }}</span>
                 </div>
                 <span>la quantité : {{ produit.quantite }}</span>
             {% endfor %}
             <div>
+                <hr>
                 <span> le client : {{ app.user.username }}</span>
             </div>
             <div>
                 <span> le total : {{ total }}</span>
             </div>
         </div>
-        #}
+
 
         {% if panierService | length > 0 %}
             <form type="POST">
