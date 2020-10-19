@@ -22,11 +22,11 @@ class SearchController extends AbstractController
      */
      public function search(Request $request, ProduitRepository $produitRepository)
      {
-         $em = $this->getDoctrine()->getManager();
+
 
          $motcle = $request->get('motcle');
-         $liste = $em->getRepository('App:Produit')->findBy(array('nom' => $motcle));
-         //dd($liste);
+         $liste = $produitRepository->findBySearch($motcle);
+         // dd($liste);
          //dd($motcle);
 
          return $this->render('search/recherche.html.twig', [

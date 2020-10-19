@@ -7,8 +7,10 @@
 
     <ul>
         <li>voici : </li>
-        {% for ligne in produit %}
+        {% for ligne in donnees %}
             <li>{{ ligne.nom }}</li>
+            <li>{{ ligne.description }}</li>
+            <li>{{  ligne.prix }}</li>
         {% endfor %}
     </ul>
 
