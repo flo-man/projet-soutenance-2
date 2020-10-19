@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Repository\ProduitRepository;
 use App\Repository\TypeRepository;
+use PhpParser\Node\Expr\Empty_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +23,20 @@ class SearchController extends AbstractController
      */
      public function search(Request $request, ProduitRepository $produitRepository)
      {
-         $em = $this->getDoctrine()->getManager();
 
          $motcle = $request->get('motcle');
-         $liste = $em->getRepository('App:Produit')->findBy(array('nom' => $motcle));
-         //dd($liste);
-         //dd($motcle);
+
+         $liste = [];
+         if(!empty($motcle) && $request->isMethod('POST')) {
+             $liste = $produitRepository->findBySearch($motcle);
+
+             if (empty($liste)){
+
+                 $this->addFlash('danger', 'Aucun produit ne correspond.');
+             }
+         } else {
+             $this->addFlash('danger', 'Veuiilez taper un mot.');
+         }
 
          return $this->render('search/recherche.html.twig', [
              'produit' => $motcle,
