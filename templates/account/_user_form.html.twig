@@ -1,5 +1,4 @@
-
-    {{ form_start(user_form) }}
+{{ form_start(user_form) }}
     <form>
         <div class="form-group">
         {{ form_row(user_form.pseudo, {label: 'Pseudo:'}) }}
@@ -36,12 +35,14 @@
         {{ form_row(user_form.telephone, {label: 'Téléphone:'}) }}
         </div>
 
-    <button type="submit" class="btn btn-success">
-        Enregisrer
-    </button>
+        <div class="mb-4">
+            <button type="submit" class="btn btn-success">
+                Enregisrer
+            </button>
 
-    <a href="{{ path('app_login') }}" class="btn btn-outline-danger">
-        Retour
-    </a>
+            <a href="{{ path('app_login') }}" class="btn btn-outline-danger">
+                Retour
+            </a>
+        </div>
     </form>
-    {{ form_end(user_form) }}
+{{ form_end(user_form) }}

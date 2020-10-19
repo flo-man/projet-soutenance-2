@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Clients
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Clients</h1>
+
+        <table class="table">
+            <tr>
+                <th>ID de client</th>
+                <th>Pseudo</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Adresse</th>
+                <th>Code Postal</th>
+                <th>Ville</th>
+                <th>Téléphone</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.pseudo }}</td>
+                    <td>{{ user.nom }} </td>
+                    <td>{{ user.prenom }} </td>
+                    <td>{{ user.adresse }} </td>
+                    <td>{{ user.codePostal }} </td>
+                    <td>{{ user.ville }} </td>
+                    <td>{{ user.telephone }} </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

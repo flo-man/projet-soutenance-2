@@ -7,6 +7,8 @@ use App\Entity\Commande;
 use App\Entity\Produit;
 use App\Entity\User;
 use App\Repository\CommandeRepository;
+use App\Repository\ProduitRepository;
+use App\Service\Panier\PanierService;
 use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -28,18 +30,21 @@ class CommandeController extends AbstractController
     /**
      * @Route("/", name="list")
      */
-    public function index(CommandeRepository $repository)
+    public function index(Request $request, CommandeRepository $repository, PanierService $panierService, ProduitRepository $produitRepository)
     {
+        $panierTotal = $panierService->getTotal($produitRepository);
         return $this->render('admin/commandes/index.html.twig', [
-            'commandes' => $repository->findAll()
+            'commandes' => $repository->findAll(),
+            'panierTotal' => $panierTotal,
         ]);
     }
 
     /**
      * @Route("/new", name="add")
      */
-    public function add(Request $request, EntityManagerInterface $em)
+    public function add(Request $request, EntityManagerInterface $em, PanierService $panierService, ProduitRepository $produitRepository)
     {
+        $panierTotal = $panierService->getTotal($produitRepository);
         $commande = new Commande();
         $form = $this->createFormBuilder($commande)
 
@@ -74,8 +79,10 @@ class CommandeController extends AbstractController
         }
 
         return $this->render('admin/commandes/add.html.twig', [
-            'commandes_form' => $form->createView()
+            'commandes_form' => $form->createView(),
+            'panierTotal' => $panierTotal
         ]);
 
     }
+
 }

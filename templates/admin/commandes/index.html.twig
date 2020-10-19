@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        <h1>Commandes</h1>
+        <h1>Commandes (manuelles)</h1>
 
         <table class="table">
             <tr>
@@ -25,6 +25,18 @@
                     <td>{{ commande.facture }} €</td>
                 </tr>
             {% endfor %}
+        </table>
+
+
+        <h1>Commandes (AJAX)</h1>
+
+        <table class="table">
+            <tr>
+                <th>ID de commande</th>
+                <th>Client</th>
+                <th>Produit(s)</th>
+                <th>Quantité</th>
+            </tr>
         </table>
     </div>
 {% endblock %}
