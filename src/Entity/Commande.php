@@ -41,7 +41,7 @@ class Commande
     private $facture;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $quantite;
 

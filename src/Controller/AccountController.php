@@ -51,6 +51,7 @@ class AccountController extends AbstractController
             'user_form' => $form->createView(),
             'panierTotal' => $panierTotal
         ]);
+
     }
 
     /**

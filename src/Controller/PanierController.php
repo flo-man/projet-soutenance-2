@@ -3,16 +3,29 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\Produit;
-use App\Form\CommandeType;
-use App\Form\ProduitFormType;
+use App\Entity\User;
 use App\Repository\ProduitRepository;
+use App\Repository\UserRepository;
 use App\Service\Panier\PanierService;
-use phpDocumentor\Reflection\Types\AbstractList;
+use Cassandra\Date;
+use Doctrine\DBAL\Types\StringType;
+use Doctrine\DBAL\Types\TextType;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use PhpParser\Node\Stmt\Foreach_;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bundle\FrameworkBundle\Command\CacheClearCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -72,16 +85,35 @@ class PanierController extends AbstractController
     }
 
     /**
-     * @Route("/panier-commande-valider/{id}", name="commande_valider")
+     * @Route("/panier-commande-valider", name="commande_valider")
      */
-    public function commandeValider(Request $request, PanierService $panierService)
+    public function commandeValider(Request $request, PanierService $panierService, EntityManagerInterface $em, UserInterface $user, ProduitRepository $produitRepository)
     {
+        // Créer une nouvelle commande
+        $commande = new Commande();
 
-        $form = $this->createForm(CommandeType::class);
+        // Ajouter les produits du panier
+        foreach ($panierService as $id => $quantite) {
+            $produit = $produitRepository->find($id);
+            $commande->addProduit($produit);
+        }
 
-        $form->handleRequest($request);
+        // Ajouter les détails de la commmande
+        $commande->getProduits();
+        $commande->setDate($date = date_create());
+        $commande->setClient($user);
+        $commande->setFacture($panierService->getTotal($produitRepository));
 
-        $this->addFlash('info', 'Commande validée');
+        $em->persist($commande);
+
+        $em->flush();
+
+        // Vider le panier une fois la commande passée
+        unset($panierService);
+
+        // Rediriger à l'accueil et confirmer la commande
+        $this->addFlash('success', 'Votre commande a été envoyée');
+        return $this->redirectToRoute('index');
     }
 }
 

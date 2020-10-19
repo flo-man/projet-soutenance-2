@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Commande;
-use Doctrine\DBAL\Types\StringType;
+use App\Entity\Produit;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -18,8 +18,11 @@ class CommandeType extends AbstractType
         $builder
             ->add('date', DateTimeType::class)
             ->add('client', EntityType::class)
-            ->add('produits', EntityType::class)
-            ->add('quantite', StringType::class)
+            ->add('produits', EntityType::class, [
+                'class' => Produit::class,
+                'multiple' => true,
+                'choice_label' => 'nom'
+            ])
             ->add('facture', MoneyType::class)
         ;
     }

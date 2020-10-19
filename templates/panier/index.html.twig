@@ -5,9 +5,9 @@
 {% block body %}
 
     <div class="container">
-            <h1>Votre panier</h1>
-
-        <table class="table" id="cart-content" data-route="{{ path('affichage_panier') }}">
+        <h1>Votre panier</h1>
+        <form type="submit" action="{{ path('commande_valider') }}">
+        <table class="table">
             <tr>
                 <th>Produit</th>
                 <th>Prix</th>
@@ -19,9 +19,9 @@
             {% if panierService | length > 0 %}
                 {% for ligne in panierService %}
                     <tr>
-                        <td data-item-id="item{{ loop.index }}">{{ ligne.produit.nom }}</td>
+                        <td>{{ ligne.produit.nom }}</td>
                         <td>{{ ligne.produit.prix }}</td>
-                        <td data-quantity="{{ ligne.quantite }}">{{ ligne.quantite }}</td>
+                        <td>{{ ligne.quantite }}</td>
                         <td>{{ ligne.quantite * ligne.produit.prix }} €</td>
                         <td>
                             <a href="{{ path('panier_ajout', {id: ligne.produit.id}) }}" class="btn btn-outline-success">+</a>
@@ -51,21 +51,20 @@
                 </div>
                 <span>la quantité : {{ produit.quantite }}</span>
             {% endfor %}
+            <hr>
             <div>
-                <hr>
                 <span> le client : {{ app.user.username }}</span>
             </div>
+            <hr>
             <div>
                 <span> le total : {{ total }}</span>
             </div>
         </div>
 
-
         {% if panierService | length > 0 %}
-            <form type="POST">
                 <button type="submit" class="btn btn-success mb-2">Valider ma commande</button>
-            </form>
         {% endif %}
+        </form>
     </div>
 
 {% endblock %}
