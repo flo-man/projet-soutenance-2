@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    <h1>Resultat de votre recherche : <em> "{{ produit }}" </em> </h1>
+
+
+    <ul>
+        <li>voici : </li>
+        {% for ligne in produit %}
+            <li>{{ ligne.nom }}</li>
+        {% endfor %}
+    </ul>
+
+
+    </div>
+
+{% endblock %}
+
