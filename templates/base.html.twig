@@ -124,9 +124,10 @@
                             <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
                         </li>
                     <div class="ml-5">
-                        <form class="form-inline my-2 my-lg-0">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search">
-                            <button class="btn btn-outline-light">Rechercher</button>
+                        <form class="form-inline my-2 my-lg-0" method="post" action="{{ path('app_search') }}">
+                            <input class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Search" name="motcle">
+                            <input class="btn btn-outline-light" type="submit" aria-label="Search" value="Recherche">
+                            {#  <a href="{{ path('app_search') }}" class="btn btn-outline-light">Rechercher</a> #}
                         </form>
                         <div class="perso pt-2">
                             <div>
