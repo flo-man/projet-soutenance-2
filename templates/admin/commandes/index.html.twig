@@ -19,7 +19,7 @@
                     <td>{{ commande.client.pseudo }}</td>
                     <td>
                         {% for ligne in commande.produits %}
-                            {{ ligne.nom }} |
+                            {{ ligne.nom }} ({{ commande.quantite }}) |
                         {% endfor %}
                     </td>
                     <td>{{ commande.facture }} €</td>

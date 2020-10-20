@@ -87,19 +87,17 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier-commande-valider", name="commande_valider")
      */
-    public function commandeValider(Request $request, PanierService $panierService, EntityManagerInterface $em, UserInterface $user, ProduitRepository $produitRepository)
+    public function commandeValider(PanierService $panierService, EntityManagerInterface $em, UserInterface $user, ProduitRepository $produitRepository)
     {
         // Créer une nouvelle commande
         $commande = new Commande();
 
         // Ajouter les produits du panier
-        foreach ($panierService as $id => $quantite) {
-            $produit = $produitRepository->find($id);
-            $commande->addProduit($produit);
+        foreach ($panierService->getFullPanier($produitRepository) as $ligne) {
+            $commande->addProduit($ligne['produit'])->setQuantite($ligne['quantite']);
         }
 
         // Ajouter les détails de la commmande
-        $commande->getProduits();
         $commande->setDate($date = date_create());
         $commande->setClient($user);
         $commande->setFacture($panierService->getTotal($produitRepository));
@@ -109,7 +107,7 @@ class PanierController extends AbstractController
         $em->flush();
 
         // Vider le panier une fois la commande passée
-        unset($panierService);
+
 
         // Rediriger à l'accueil et confirmer la commande
         $this->addFlash('success', 'Votre commande a été envoyée');
