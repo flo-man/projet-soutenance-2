@@ -17,15 +17,32 @@ class UserProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('pseudo', TextType::class)
-            ->add('email', EmailType::class)
-            ->add('nom', TextType::class)
-            ->add('prenom', TextType::class)
-            ->add('adresse', TextType::class)
-            ->add('code_postal', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('telephone', TextType::class)
+            ->add('pseudo', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('email', EmailType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('nom', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('prenom', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('adresse', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('code_postal', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('ville', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
+            ->add('telephone', TextType::class, [
+                'attr' => ['class' => 'form-control']
+            ])
             ->add('plainPassword', RepeatedType::class, [
+                'options' => ['attr' => ['class' => 'form-control']],
                 'mapped'            => false,
                 'required'          => false,
                 'type'              => PasswordType::class,
