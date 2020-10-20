@@ -119,5 +119,16 @@ class IndexController extends AbstractController
         }
     }
 
+    /**
+     * @Route ("/cgv")
+     */
+    public function CGV(PanierService $panierService, ProduitRepository $produitRepository)
+    {
+        $panierTotal = $panierService->getTotal($produitRepository);
+        return $this->render('index/cgv.html.twig', [
+            'panierTotal' => $panierTotal
+        ]);
+    }
+
 
 }
